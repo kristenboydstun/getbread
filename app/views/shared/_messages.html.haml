@@ -1,0 +1,5 @@
+.container
+  - flash.each do |type, message|
+    %div{:class => "alert #{flash_class type}"}
+      %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} &times;
+      = message
