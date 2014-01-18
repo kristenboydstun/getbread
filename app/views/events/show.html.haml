@@ -1,0 +1,26 @@
+%p#notice= notice
+.row
+  .col-md-3
+    %br
+
+    %br
+    %br
+    %h4 Host: #{@event.host_name}
+    %hr
+    %h4 Location: #{@event.location}
+    %hr
+
+  .col-md-9
+    .page-header
+      %h2
+        = @event.name
+
+
+    .row
+      .col-md-5
+        %h4
+          %strong Unclaimed:
+
+        %dl.dl-horizontal
+          %br
+

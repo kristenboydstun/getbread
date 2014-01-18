@@ -7,7 +7,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
 
     if @event.save
-      redirect_to root_path
+      redirect_to event_path(@event)
     else
       render :new
     end
@@ -15,5 +15,9 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit!
+  end
+
+  def show
+    @event = Event.find(params[:id])
   end
 end
