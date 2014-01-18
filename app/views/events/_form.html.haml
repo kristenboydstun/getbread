@@ -1,6 +1,6 @@
 %section.event_form
   / multistep form
-  %form#msform
+  = form_for :event, url: { action: "create" }, html: { id: "msform" } do |f|
     / progressbar
     %ul#progressbar
       %li.active Account Setup
@@ -10,23 +10,24 @@
     %fieldset
       %h2.fs-title Create an event in 3 steps
       %h3.fs-subtitle You will receive an email with the link to your event
-      %input{:name => "name", :placeholder => "Your name", :type => "text"}/
-      %input{:name => "email", :placeholder => "Email", :type => "text"}/
+      = f.text_field :host_name, placeholder: "Your name"
+      = f.text_field :host_email, placeholder: "Email"
       %input.next.action-button{:name => "next", :type => "button", :value => "Next"}/
     %fieldset
       %h2.fs-title Event Details
       %h3.fs-subtitle Almost done!
-      %input{:name => "title", :placeholder => "Title", :type => "text"}/
-      %input{:name => "location", :placeholder => "Location (optional)", :type => "text"}/
-      %textarea{:name => "details", :placeholder => "Details (optional)"}
+      = f.text_field :name, placeholder: "Event name"
+      = f.text_field :location, placeholder: "Location (optional)"
+      = f.text_field :description, placeholder: "Details (optional)"
       %input.previous.action-button{:name => "previous", :type => "button", :value => "Previous"}/
       %input.next.action-button{:name => "next", :type => "button", :value => "Next"}/
     %fieldset
       %h2.fs-title Pick a Date
       %h3.fs-subtitle Last step
-      %input{"data-behaviour" => "datepicker", :placeholder => "Date", :type => "text"}/
+      = f.text_field :start_date, placeholder: "Date", 'data-behaviour' => "datepicker"
       %input.previous.action-button{:name => "previous", :type => "button", :value => "Previous"}/
       %input.action-button{:name => "submit_button", :type => "submit", :value => "Done!"}/
 
 / jQuery easing plugin
 %script{:src => "http://thecodeplayer.com/uploads/js/jquery.easing.min.js", :type => "text/javascript"}
+

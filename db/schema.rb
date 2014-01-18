@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20140118185905) do
     t.string   "host_email"
     t.string   "location"
     t.text     "description"
-    t.datetime "start_datetime"
+    t.date     "start_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
