@@ -7,19 +7,20 @@
             = @event.name
           %h3
             = "Hosted by #{@event.host_name}"
-        %table.table.table-striped
+        %table.table.table-striped#users
           %thead
             %tr
               %th(width="30%") Name
               %th(width="15%") Items
           %tbody
-            %tr
-              %td
-                %a#username{"data-name" => "owner_name", "data-original-title" => "Enter your name", "data-type" => "text", "data-url" => "/events/#{@event.slug}/items/#{@event.items.first.id}", :href => "#"}
-                  = @event.items.first.owner_name
+            - @event.items.each do |item|
+              %tr
+                %td
+                  %a.owner{"data-name" => "owner_name", "data-original-title" => "Enter your name", "data-type" => "text", "data-pk" => item.id, "data-url" => "/events/#{@event.slug}/items/#{item.id}", :href => "#"}
+                    = item.owner_name
 
-              %td
-                = @event.items.first.name
+                %td
+                  = item.name
   %hr
   .row
     .col-sm-3.col-sm-offset-1
@@ -32,12 +33,11 @@
 
 :javascript
   $(function(){
-      $('#username').editable({
+      $('#users a.owner').editable({
           title: 'Enter username',
           ajaxOptions: {
             dataType: 'json',
             type: 'PUT'
-        },
-        pk: 1
+        }
       });
   });
