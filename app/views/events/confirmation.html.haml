@@ -1,7 +1,14 @@
 %section.confirmation_page
   .row
     .col-sm-10.col-sm-offset-1
-      %h2 Send out invitations
-      %p Email this link to everyone you want to invite
+      %h2 Your event is ready!
+      %br
+      %h3 1) Use the admin link to plan the menu (optional)
+      %p
+        = link_to admin_event_path(@event), admin_event_path(@event)
+      %br
+      %h3 2) Email this link to everyone you want to invite
       %p
         = link_to event_path(@event), event_path(@event)
+      %br
+      

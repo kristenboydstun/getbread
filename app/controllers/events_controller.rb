@@ -18,9 +18,14 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find_by(slug: params[:id])
+    @item = Item.new
   end
 
   def confirmation
+    @event = Event.find_by(slug: params[:id])
+  end
+
+  def admin
     @event = Event.find_by(slug: params[:id])
   end
 end

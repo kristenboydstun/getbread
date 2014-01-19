@@ -5,7 +5,10 @@ Getbread::Application.routes.draw do
   resources :events do
     member do
       get 'confirmation'
+      get 'admin'
     end
+
+    resources :items
   end
 
 

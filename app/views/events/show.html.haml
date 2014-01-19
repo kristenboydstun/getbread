@@ -7,15 +7,24 @@
             = @event.name
           %h3
             = "Hosted by #{@event.host_name}"
-        %table.table
+        %table.table.table-striped
           %thead
             %tr
               %th(width="30%") Name
               %th(width="15%") Items
           %tbody
-            - 8.times do
+            - @event.items.each do |item|
               %tr
                 %td
-                  Kristen
+                  = item.owner_name
                 %td
-                  cheese
+                  = item.name
+  %hr
+  .row
+    .col-sm-3.col-sm-offset-1
+      = form_for [@event, @item], html: { id: "form-inline", :role => "form" } do |f|
+        .form-group
+          = f.text_field :owner_name, placeholder: "Martha", class: 'form-control'
+        .form-group
+          = f.text_field :name, placeholder: "milk", class: 'form-control'
+        %button.btn.btn-primary{:type => "submit"} Add
