@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  after_validation :generate_slug
+  after_save :generate_slug
 
   validates_presence_of :host_name
   validates_presence_of :host_email
