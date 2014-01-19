@@ -23,6 +23,7 @@ class EventsController < ApplicationController
   end
 
   def confirmation
+    binding.pry
     @event = Event.find_by(slug: params[:id])
   end
 

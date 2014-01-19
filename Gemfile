@@ -5,8 +5,7 @@ gem 'rails', '4.0.0'
 
 gem 'haml-rails'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'pg'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -14,6 +13,8 @@ gem 'sass-rails', '~> 4.0.0'
 gem 'bootstrap-sass', '>= 3.0.2'
 gem 'bootstrap-datepicker-rails'
 gem 'jquery-turbolinks'
+
+gem 'rails_12factor', group: :production
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -50,6 +51,8 @@ end
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0.beta'
 end
+
+ruby "2.0.0"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
