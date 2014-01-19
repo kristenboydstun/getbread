@@ -7,35 +7,42 @@
             = @event.name
           %h3
             = "Hosted by #{@event.host_name}"
-        %table.table.table-striped#users
+        %table.table.table-striped#claimed
           %thead
             %tr
               %th(width="30%") Name
               %th(width="15%") Items
           %tbody
-            - @event.items.each do |item|
+            - @event.claims.each do |claim|
               %tr
                 %td
-                  %a.owner{"data-name" => "owner_name", "data-original-title" => "Enter your name", "data-type" => "text", "data-pk" => item.id, "data-url" => "/events/#{@event.slug}/items/#{item.id}", :href => "#"}
-                    = item.owner_name
+                  %a.owner{"data-name" => "username", "data-original-title" => "Enter your name", "data-type" => "text", "data-pk" => claim.id, "data-url" => "/events/#{@event.slug}/claims/#{claim.id}", :href => "#"}
+                    = claim.username
 
                 %td
-                  = item.name
+                  %a.thing{"data-name" => "item_id", "data-original-title" => "What will you bring?", "data-type" => "checklist", "data-pk" => claim.id, "data-value" => claim.id, "data-url" => "/events/#{@event.slug}/claims/#{claim.id}", "data-source" => item_options(@event), :href => "#"}
+                    - claim.items.each do |item|
+                      = item.name
+                      %br
   %hr
   .row
     .col-sm-3.col-sm-offset-1
-      = form_for [@event, @item], html: { id: "form-inline", :role => "form" } do |f|
+      = form_for [@event, @claim], html: { id: "form-inline", :role => "form" } do |f|
         .form-group
-          = f.text_field :owner_name, placeholder: "Martha", class: 'form-control'
-        .form-group
-          = f.text_field :name, placeholder: "milk", class: 'form-control'
+          = f.text_field :username, placeholder: "Martha", class: 'form-control'
         %button.btn.btn-primary{:type => "submit"} Add
 
 :javascript
   $(function(){
-      $('#users a.owner').editable({
-          title: 'Enter username',
+      $.fn.editable.defaults.mode = 'inline';
+      $('#claimed a.owner').editable({
           ajaxOptions: {
+            dataType: 'json',
+            type: 'PUT'
+        }
+      });
+      $('#claimed a.thing').editable({
+        ajaxOptions: {
             dataType: 'json',
             type: 'PUT'
         }

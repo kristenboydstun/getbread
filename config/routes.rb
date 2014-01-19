@@ -9,6 +9,7 @@ Getbread::Application.routes.draw do
     end
 
     resources :items
+    resources :claims
   end
 
 

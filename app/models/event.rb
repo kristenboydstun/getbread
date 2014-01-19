@@ -6,7 +6,8 @@ class Event < ActiveRecord::Base
 
   validates_presence_of :name
 
-  has_many :items, :dependent => :destroy
+  has_many :claims, :dependent => :destroy
+  has_many :items
 
   def generate_slug
     self.slug = SecureRandom.hex(10) until unique_token?

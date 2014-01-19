@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
       if @item.update_attributes({params[:name] => params[:value]})
         format.json { head :no_content } # 204 No Content
       else
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+        format.json { render json: @item.errors, status: :unprocessable_entity }
       end
     end
   end
