@@ -6,6 +6,18 @@ class ItemsController < ApplicationController
     redirect_to :back
   end
 
+  def update
+    @item = Item.find(params[:id])
+
+    respond_to do |format|
+      if @item.update_attributes({params[:name] => params[:value]})
+        format.json { head :no_content } # 204 No Content
+      else
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def item_params
     params.require(:item).permit!
   end

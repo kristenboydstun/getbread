@@ -13,12 +13,13 @@
               %th(width="30%") Name
               %th(width="15%") Items
           %tbody
-            - @event.items.each do |item|
-              %tr
-                %td
-                  = item.owner_name
-                %td
-                  = item.name
+            %tr
+              %td
+                %a#username{"data-name" => "owner_name", "data-original-title" => "Enter your name", "data-type" => "text", "data-url" => "/events/#{@event.slug}/items/#{@event.items.first.id}", :href => "#"}
+                  = @event.items.first.owner_name
+
+              %td
+                = @event.items.first.name
   %hr
   .row
     .col-sm-3.col-sm-offset-1
@@ -28,3 +29,15 @@
         .form-group
           = f.text_field :name, placeholder: "milk", class: 'form-control'
         %button.btn.btn-primary{:type => "submit"} Add
+
+:javascript
+  $(function(){
+      $('#username').editable({
+          title: 'Enter username',
+          ajaxOptions: {
+            dataType: 'json',
+            type: 'PUT'
+        },
+        pk: 1
+      });
+  });
