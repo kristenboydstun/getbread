@@ -8,6 +8,8 @@ class CreateEvents < ActiveRecord::Migration
       t.text :description
       t.date :start_date
 
+      t.string :slug
+
       t.timestamps
     end
   end

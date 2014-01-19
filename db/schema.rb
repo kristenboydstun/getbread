@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20140118185905) do
     t.string   "location"
     t.text     "description"
     t.date     "start_date"
+    t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

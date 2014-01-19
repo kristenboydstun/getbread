@@ -10,6 +10,8 @@
     %fieldset
       %h2.fs-title Create an event in 3 steps
       %h3.fs-subtitle You will receive an email with the link to your event
+      %h3.fs-subtitle
+        = render "shared/errors", :obj => @event
       = f.text_field :host_name, placeholder: "Your name"
       = f.text_field :host_email, placeholder: "Email"
       %input.next.action-button{:name => "next", :type => "button", :value => "Next"}/

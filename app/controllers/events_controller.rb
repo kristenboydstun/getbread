@@ -5,9 +5,8 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-
     if @event.save
-      redirect_to event_path(@event)
+      redirect_to confirmation_event_path(@event)
     else
       render :new
     end
@@ -18,6 +17,10 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find(params[:id])
+    @event = Event.find_by(slug: params[:id])
+  end
+
+  def confirmation
+    @event = Event.find_by(slug: params[:id])
   end
 end
