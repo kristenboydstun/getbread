@@ -25,24 +25,25 @@
                       = item.name
                       %br
   %hr
+  %br
   .row
     .col-sm-3.col-sm-offset-1
       = form_for [@event, @claim], html: { id: "form-inline", :role => "form" } do |f|
         .form-group
           = f.text_field :username, placeholder: "Martha", class: 'form-control'
+        %button.btn.btn-primary{:type => "submit"} Count me in!
+    .col-sm-3.col-sm-offset-1
+      = form_for [@event, @item], html: { id: "form-inline", :role => "form" } do |f|
+        .form-group
+          = f.text_field :name, placeholder: "cheese", class: 'form-control'
         %button.btn.btn-primary{:type => "submit"} Add
+
 
 :javascript
   $(function(){
       $.fn.editable.defaults.mode = 'inline';
-      $('#claimed a.owner').editable({
+      $('#claimed a').editable({
           ajaxOptions: {
-            dataType: 'json',
-            type: 'PUT'
-        }
-      });
-      $('#claimed a.thing').editable({
-        ajaxOptions: {
             dataType: 'json',
             type: 'PUT'
         }

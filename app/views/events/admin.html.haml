@@ -2,3 +2,16 @@
   .jumbotron
     %h2 Under construction
     %h3 Awesome menu-builder coming soon
+    %h4 ... but until then:
+
+  %hr
+  .row
+    .col-sm-3.col-sm-offset-1
+      = form_for [@event, @item], html: { id: "form-inline", :role => "form" } do |f|
+        .form-group
+          = f.text_field :name, placeholder: "cheese", class: 'form-control'
+        %button.btn.btn-primary{:type => "submit"} Add
+    .col-sm-3.col-sm-offset-1
+      - @event.items.each do |item|
+        = item.name
+        %br

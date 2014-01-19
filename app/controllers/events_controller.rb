@@ -5,7 +5,6 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    binding.pry
     if @event.save
       redirect_to confirmation_event_path(@event)
     else
@@ -29,5 +28,6 @@ class EventsController < ApplicationController
 
   def admin
     @event = Event.find_by(slug: params[:id])
+    @item = Item.new
   end
 end

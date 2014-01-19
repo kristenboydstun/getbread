@@ -21,4 +21,12 @@ class Event < ActiveRecord::Base
     self.class.count(:conditions => {:slug => self.slug}) == 0
   end
 
+  def unclaimed_items
+    unclaimed = []
+    self.items.each do |item|
+      unclaimed << item if item.claim_id.blank?
+    end
+    unclaimed
+  end
+
 end
