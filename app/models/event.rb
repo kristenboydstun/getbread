@@ -2,7 +2,7 @@ class Event < ActiveRecord::Base
   before_save :generate_slug
 
   validates_presence_of :host_name
-  validates_presence_of :host_email
+  #validates_presence_of :host_email
 
   validates_presence_of :name
 
