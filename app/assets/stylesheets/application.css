@@ -9,8 +9,11 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require bootstrap
+ *= require general.sass
  *= require bootstrap-datepicker
  *= require jquery.ui.all
- *= require_tree .
+ *= require events_confirmation.sass
+ *= require events_form.sass
+ *= require events_show.sass
+ *= require public_pages.sass
  */

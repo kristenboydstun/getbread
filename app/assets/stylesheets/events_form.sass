@@ -1,19 +1,15 @@
-/*custom font
-@import url(http://fonts.googleapis.com/css?family=Montserrat)
-
 section.event_form
-  height: 800px
+  height: 900px
   /*Image only BG fallback
-  background: url('http://thecodeplayer.com/uploads/media/gs.png')
+  background: image-url('food.png')
   /*background = gradient + image pattern combo
-  background: linear-gradient(rgba(196, 102, 0, 0.2), rgba(155, 89, 182, 0.2)), url('http://thecodeplayer.com/uploads/media/gs.png')
-  font-family: montserrat, arial, verdana
+  background: linear-gradient(rgba(182, 163, 88, 0.2), rgba(213, 41, 34, 0.5)), image-url('food.png')
 
 #msform
   width: 400px
   margin: 50px auto
   margin-top: 0px
-  padding-top: 50px
+  padding-top: 180px
   text-align: center
   position: relative
   fieldset
@@ -36,12 +32,11 @@ section.event_form
     margin-bottom: 10px
     width: 100%
     box-sizing: border-box
-    font-family: montserrat
     color: #2C3E50
     font-size: 13px
   .action-button
     width: 100px
-    background: #27AE60
+    background: rgba(213, 41, 34, 1.0)
     font-weight: bold
     color: white
     border: 0 none
@@ -50,7 +45,7 @@ section.event_form
     padding: 10px 5px
     margin: 10px 5px
     &:hover, &:focus
-      box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60
+      box-shadow: 0 0 0 2px white, 0 0 0 3px rgba(213, 41, 34, 1.0)
 
 /*Hide all except first fieldset
 
@@ -75,6 +70,7 @@ section.event_form
 /*progressbar
 
 #progressbar
+  padding-left: 0px
   margin-bottom: 30px
   overflow: hidden
   /*CSS counters to number the steps
@@ -113,7 +109,7 @@ section.event_form
       content: none
     &.active
       &:before, &:after
-        background: #27AE60
+        background: rgba(213, 41, 34, 1.0)
         color: white
 
 /*progressbar connectors

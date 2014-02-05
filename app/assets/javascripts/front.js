@@ -13,10 +13,10 @@ $(document).ready(function(){
   $(".draggable").draggable({
     stack: ".draggable",
     start: function() {
-      //$(".item_trash").removeClass("hidden");
+      $(".item_trash").removeClass("hidden");
     },
     stop: function() {
-      //$(".item_trash").addClass("hidden");
+      $(".item_trash").addClass("hidden");
     }
   });
   $( ".droppable" ).droppable({

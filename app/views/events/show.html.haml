@@ -47,8 +47,8 @@
         .col-md-10.col-md-offset-1
           = form_for [@event, @claim], html: { class: "form-inline", :role => "form" } do |f|
             .form-group
-              = f.text_field :username, placeholder: "Martha", class: 'form-control'
-            %button.btn.btn-primary{:type => "submit"} Count me in!
+              = f.text_field :username, placeholder: "Your name", class: 'form-control'
+            %button.btn.btn-primary{:type => "submit"} +
 
 :javascript
   $(function(){

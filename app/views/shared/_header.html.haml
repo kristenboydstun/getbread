@@ -1,7 +1,5 @@
 %navbar.navbar-fixed-top.navbar-inverse{:role => "navigation"}
   / Brand and toggle get grouped for better mobile display
-  .row
-    %ul.nav.navbar-nav
-      %li.col-md-3.col-md-offset-5
-        %a.navbar-brand{:href => "/"}
-          = image_tag("getBread.png", height: '40')
+  %div#logo
+    %a.navbar-brand{:href => "/"}
+      = image_tag("getBread.png", height: '40')
