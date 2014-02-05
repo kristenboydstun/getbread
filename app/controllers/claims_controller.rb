@@ -7,22 +7,14 @@ class ClaimsController < ApplicationController
   end
 
   def update
-    @claim = Claim.find(params[:id])
-
+    @claim = Claim.find(params[:claim_id])
     respond_to do |format|
-      if params[:name] == 'username'
-        if @claim.update_attributes({params[:name] => params[:value]})
-          format.json { head :no_content } # 204 No Content
-        end
-      elsif params[:name] == 'item_id'
-        @claim.items.delete_all
-        params[:value].each do |item_id|
-          @claim.items << Item.find(item_id)
-        end
-        format.json { head :no_content } # 204 No Content
+      if params[:add] == "true"
+        @claim.items << Item.find(params[:item_id])
       else
-        format.json { render json: @claim.errors, status: :unprocessable_entity }
+        @claim.items.delete(Item.find(params[:item_id]))
       end
+      format.json { head :no_content } # 204 No Content
     end
   end
 

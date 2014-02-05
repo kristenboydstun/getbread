@@ -8,26 +8,32 @@
           %h3
             = "Hosted by #{@event.host_name}"
         %br
-      .unclaim_square.droppable
-        - @event.items.each do |item|
-          %span.label.label-primary.draggable
-            = item.name
+      %ul.list-unstyled.unclaim_square.droppable.sortable
+        - @event.unclaimed_items.each do |item|
+          %li
+            %span.label.label-primary.draggable{"data-claim_id" => nil, "data-item_id" => item.id}
+              = item.name
       %br
       .row
         .col-md-7
-          = form_for [@event, @item], html: { class: "form-inline", :role => "form" } do |f|
+          = form_for @item, html: { class: "form-inline", :role => "form" } do |f|
             .form-group
               = f.text_field :name, placeholder: "cheese", class: 'form-control'
+              = hidden_field_tag 'event_id', @event.id
             %button.btn.btn-primary{:type => "submit"} +
+      %br
+      .row
+        .col-md-7.col-md-offset-3.item_trash.droppable
+          .glyphicon.glyphicon-trash
     .col-md-6
       %ul.list-unstyled
         - @event.claims.each do |claim|
           %li.row
             %h5.claim_name.col-md-2.col-md-offset-1
               = claim.username
-            .claim_square.col-md-3.droppable
+            .claim_square.col-md-3.droppable{"data-claim_id" => claim.id, "data-url" => "/events/#{@event.slug}/claims/#{claim.id}"}
               - claim.items.each do |item|
-                %span.label.label-primary.draggable
+                %span.label.label-primary.draggable{"data-claim_id" => claim.id, "data-item_id" => item.id, "data-url" => "/events/#{@event.slug}/claims/#{claim.id}"}
                   = item.name
       %br
       .row

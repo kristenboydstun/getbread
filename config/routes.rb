@@ -7,10 +7,9 @@ Getbread::Application.routes.draw do
       get 'confirmation'
       get 'admin'
     end
-
-    resources :items
     resources :claims
   end
 
+  resources :items
 
 end
