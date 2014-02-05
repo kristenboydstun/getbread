@@ -7,7 +7,14 @@
             = @event.name
           %h3
             = "Hosted by #{@event.host_name}"
-        %br
+          %h4
+            = @event.claims.count
+            %span.glyphicon.glyphicon-user
+            = @event.items.count
+            %span.glyphicon.glyphicon-cutlery
+          %br
+  .row
+    .col-md-6
       %ul.list-unstyled.unclaim_square.droppable.sortable
         - @event.unclaimed_items.each do |item|
           %li
@@ -23,7 +30,7 @@
             %button.btn.btn-primary{:type => "submit"} +
       %br
       .row
-        .col-md-7.col-md-offset-3.item_trash.droppable
+        .col-md-7.col-md-offset-3.item_trash.droppable.hidden
           .glyphicon.glyphicon-trash
     .col-md-6
       %ul.list-unstyled

@@ -7,9 +7,9 @@ class ClaimsController < ApplicationController
   end
 
   def update
-    @claim = Claim.find(params[:claim_id])
+    @claim = Claim.find(params[:id])
     respond_to do |format|
-      if params[:add] == "true"
+      if params[:todo] == "add"
         @claim.items << Item.find(params[:item_id])
       else
         @claim.items.delete(Item.find(params[:item_id]))
