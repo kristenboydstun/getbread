@@ -1,42 +1,41 @@
 %section.show_event
-  .row
-    .col-sm-10.col-sm-offset-1
-      %article
-        %header
-          %h2
-            = @event.name
-          %h3
-            = "Hosted by #{@event.host_name}"
-        %table.table.table-striped#claimed
-          %thead
-            %tr
-              %th(width="30%") Name
-              %th(width="15%") Items
-          %tbody
-            - @event.claims.each do |claim|
-              %tr
-                %td
-                  %a.owner{"data-name" => "username", "data-original-title" => "Enter your name", "data-type" => "text", "data-pk" => claim.id, "data-url" => "/events/#{@event.slug}/claims/#{claim.id}", :href => "#"}
-                    = claim.username
-
-                %td
-                  %a.thing{"data-name" => "item_id", "data-original-title" => "What will you bring?", "data-type" => "checklist", "data-pk" => claim.id, "data-value" => claim.id, "data-url" => "/events/#{@event.slug}/claims/#{claim.id}", "data-source" => item_options(@event), :href => "#"}
-                    - claim.items.each do |item|
-                      = item.name
-                      %br
-  %hr
-  %br
-  .row
-    .col-sm-3.col-sm-offset-1
-      = form_for [@event, @claim], html: { id: "form-inline", :role => "form" } do |f|
-        .form-group
-          = f.text_field :username, placeholder: "Martha", class: 'form-control'
-        %button.btn.btn-primary{:type => "submit"} Count me in!
-    .col-sm-3.col-sm-offset-1
-      = form_for [@event, @item], html: { id: "form-inline", :role => "form" } do |f|
-        .form-group
-          = f.text_field :name, placeholder: "cheese", class: 'form-control'
-        %button.btn.btn-primary{:type => "submit"} Add
+  %article
+    %header
+      %h2
+        = @event.name
+      %h3
+        = "Hosted by #{@event.host_name}"
+    %br
+    .row
+      .col-md-6
+        %ul.list-unstyled
+          - @event.claims.each do |claim|
+            %li.row
+              %h5.claim_name.col-md-2.col-md-offset-1
+                = claim.username
+              .claim_square.col-md-3.droppable
+                - claim.items.each do |item|
+                  %span.label.label-primary.draggable
+                    = item.name
+        %br
+        .row
+          .col-md-10.col-md-offset-1
+            = form_for [@event, @claim], html: { class: "form-inline", :role => "form" } do |f|
+              .form-group
+                = f.text_field :username, placeholder: "Martha", class: 'form-control'
+              %button.btn.btn-primary{:type => "submit"} Count me in!
+      .col-md-6
+        .unclaim_square.droppable
+          - @event.items.each do |item|
+            %span.label.label-primary.draggable
+              = item.name
+        %br
+        .row
+          .col-md-7
+            = form_for [@event, @item], html: { class: "form-inline", :role => "form" } do |f|
+              .form-group
+                = f.text_field :name, placeholder: "cheese", class: 'form-control'
+              %button.btn.btn-primary{:type => "submit"} +
 
 
 :javascript
