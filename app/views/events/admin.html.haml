@@ -1,8 +1,32 @@
 %section.show_event
-  %h3 Menu-builder coming soon
-  %h4 ... but until then:
-
+  %h3 Menu-builder
+  %h4 Drag and drop items to your event or
+  %h4
+    = form_for @item, html: { class: "form-inline", :role => "form" } do |f|
+      .form-group
+        = f.text_field :name, placeholder: "add something", class: 'form-control'
+        = hidden_field_tag 'event_id', @event.id
+      %button.btn.btn-primary{:type => "submit"} +
+  %br
+  / Nav tabs
+  %ul.nav.nav-tabs
+    %li.active
+      %a{"data-toggle" => "tab", :href => "#bbq"} BBQ
+    %li
+      %a{"data-toggle" => "tab", :href => "#picnic"} Picnic
+    %li
+      %a{"data-toggle" => "tab", :href => "#extra"} Extra
+  / Tab panes
+  .tab-content
+    #bbq.tab-pane.active So you're having a BBQ
+    #picnic.tab-pane ...
+    #extra.tab-pane ...
+  %br
+  %br
   %hr
+  .row
+    .col-md-3.col-md-offset-1
+      %h4= @event.name
   .row
     .col-md-3.col-md-offset-1
       %ul.list-unstyled.unclaim_square.droppable.sortable
@@ -11,11 +35,7 @@
             %span.label.label-primary.draggable
               = item.name
     .col-md-4.col-md-offset-1
-      = form_for @item, html: { class: "form-inline", :role => "form" } do |f|
-        .form-group
-          = f.text_field :name, placeholder: "cheese", class: 'form-control'
-          = hidden_field_tag 'event_id', @event.id
-        %button.btn.btn-primary{:type => "submit"} +
+      
     
       %br
       .item_trash.droppable.hidden
