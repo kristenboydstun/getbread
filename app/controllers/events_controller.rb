@@ -29,5 +29,6 @@ class EventsController < ApplicationController
   def admin
     @event = Event.find_by(slug: params[:id])
     @item = Item.new
+    @menus = Menu.all
   end
 end

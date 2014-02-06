@@ -8,17 +8,17 @@
           %h3
             = "Hosted by #{@event.host_name}"
           %h4
-            = @event.claims.count
+            = @event.taken_claims.count
             %span.glyphicon.glyphicon-user
             = @event.items.count
             %span.glyphicon.glyphicon-cutlery
           %br
   .row
     .col-md-6
-      %ul.list-unstyled.unclaim_square.droppable.sortable
-        - @event.unclaimed_items.each do |item|
+      %ul.list-unstyled.unclaim_square.droppable{"data-claim_id" => @event.untaken_claim.id, "data-url" => "/events/#{@event.slug}/claims/#{@event.untaken_claim.id}"}
+        - @event.untaken_items.each do |item|
           %li
-            %span.label.label-primary.draggable{"data-claim_id" => nil, "data-item_id" => item.id}
+            %span.label.label-primary.draggable{"data-claim_id" => @event.untaken_claim.id, "data-item_id" => item.id, "data-url" => "/events/#{@event.slug}/claims/#{@event.untaken_claim.id}"}
               = item.name
       %br
       .row
@@ -34,13 +34,13 @@
           .glyphicon.glyphicon-trash
     .col-md-6
       %ul.list-unstyled
-        - @event.claims.each do |claim|
+        - @event.taken_claims.each do |taken_claim|
           %li.row
             %h5.claim_name.col-md-2.col-md-offset-1
-              = claim.username
-            .claim_square.col-md-3.droppable{"data-claim_id" => claim.id, "data-url" => "/events/#{@event.slug}/claims/#{claim.id}"}
-              - claim.items.each do |item|
-                %span.label.label-primary.draggable{"data-claim_id" => claim.id, "data-item_id" => item.id, "data-url" => "/events/#{@event.slug}/claims/#{claim.id}"}
+              = taken_claim.username
+            .claim_square.col-md-3.droppable{"data-claim_id" => taken_claim.id, "data-url" => "/events/#{@event.slug}/claims/#{taken_claim.id}"}
+              - taken_claim.items.each do |item|
+                %span.label.label-primary.draggable{"data-claim_id" => taken_claim.id, "data-item_id" => item.id, "data-url" => "/events/#{@event.slug}/claims/#{taken_claim.id}"}
                   = item.name
       %br
       .row

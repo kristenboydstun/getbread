@@ -7,10 +7,10 @@ class Event < ActiveRecord::Base
   validates_presence_of :name
 
   has_many :claims, :dependent => :destroy
-  has_many :items
+  has_many :items, through: :claims
 
   def generate_slug
-    self.slug = SecureRandom.hex(10) until unique_token?
+    self.slug = SecureRandom.hex(10)
   end
 
   def to_param
@@ -18,15 +18,22 @@ class Event < ActiveRecord::Base
   end
 
   def unique_token?
+    return true if self.class.count == 0
     self.class.count(:conditions => {:slug => self.slug}) == 0
   end
 
-  def unclaimed_items
-    unclaimed = []
-    self.items.each do |item|
-      unclaimed << item if item.claim_id.blank?
-    end
-    unclaimed
+  def untaken_items
+    untaken_claim.items
+  end
+
+  def taken_claims
+    claims.select { |claim| claim.username != nil }
+  end
+
+  def untaken_claim
+    untaken = claims.find_by(username: nil)
+    untaken = Claim.create(event: self) if untaken.nil?
+    untaken
   end
 
 end

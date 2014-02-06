@@ -8,8 +8,6 @@ $(document).ready(function(){
     });
   };
 
-  $(".sortable").sortable();
-
   $(".draggable").draggable({
     stack: ".draggable",
     start: function() {
@@ -41,27 +39,17 @@ $(document).ready(function(){
       if (droppedOn.hasClass("item_trash")) {
         console.log("You're trying to throw that away!");
       }
-      else if(droppedOn.hasClass("unclaim_square")) {
-        console.log("You put it in the unclaimed square!");
-        if (typeof dropped.data("claim_id") == 'undefined') {
-          console.log("Oh well. Nothing to do.");
-        }
-        else {
-          console.log("OH NO! We need to unclaim that sucker.");
-          todo = "remove";
-          url = dropped.data("url");
-          change_item(url, dropped.data("item_id"), todo);
-        }
-      }
       else {
-        console.log("You put it in a CLAIM square!");
+        
         if (dropped.data("claim_id") != droppedOn.data("claim_id")) {
-          if(typeof dropped.data("claim_id") != 'undefined') {
-            console.log("You grabbed that from someone!");
+          // If it came from a claim, remove the claim first
+          if(typeof dropped.data("claim_id") != "undefined") {
+            console.log("first removing the claim");
             todo = "remove";
             url = dropped.data("url");
             change_item(url, dropped.data("item_id"), todo);
           }
+          console.log("now adding to a claim");
           todo = "add";
           url = droppedOn.data("url");
           change_item(url, dropped.data("item_id"), todo);

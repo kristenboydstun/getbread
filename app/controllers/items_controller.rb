@@ -1,8 +1,10 @@
 class ItemsController < ApplicationController
   def create
     @event = Event.find(params[:event_id])
-    @item = @event.items.new(item_params)
+    @item = Item.new(item_params)
     @item.save
+    @unclaimed = @event.untaken_claim
+    @unclaimed.items << @item
     redirect_to :back
   end
 
