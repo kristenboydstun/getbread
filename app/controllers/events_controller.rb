@@ -6,7 +6,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     if @event.save
-      redirect_to confirmation_event_path(@event)
+      redirect_to admin_event_path(@event)
     else
       render :new
     end
@@ -20,6 +20,10 @@ class EventsController < ApplicationController
     @event = Event.find_by(slug: params[:id])
     @item = Item.new
     @claim = Claim.new
+    @hash = Gmaps4rails.build_markers([@event]) do |event, marker|
+      marker.lat event.latitude
+      marker.lng event.longitude
+    end
   end
 
   def confirmation

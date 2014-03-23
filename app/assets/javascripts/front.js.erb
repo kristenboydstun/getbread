@@ -1,0 +1,86 @@
+$(document).ready(function(){
+
+  if ($("#map").length != 0) {
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+      var markers = $("#map").data("markers");
+      markers = handler.addMarkers(markers);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+      handler.getMap().setZoom(13);
+    });
+  }
+
+
+
+
+  var change_item = function($url, $item_id, $todo) {
+    $.ajax({
+      type: "PUT",
+      url: $url,
+      data: {todo:$todo, item_id:$item_id}
+    });
+  };
+
+  $(".draggable").draggable({
+    stack: ".draggable",
+    start: function() {
+      //$(".item_trash").removeClass("hidden");
+    },
+    stop: function() {
+      //$(".item_trash").addClass("hidden");
+    }
+  });
+  $( ".droppable" ).droppable({
+    drop: function( event, ui ) {
+      //$( this )
+        //.addClass( "ui-state-highlight" )
+        //.find( "p" )
+        //  .html( "Dropped!" );
+      
+      var dropped = ui.draggable;
+      var droppedOn = $(this);
+
+      console.log("dropped");
+      console.log(dropped);
+      console.log("droppedOn");
+      console.log(droppedOn);
+
+      var url;
+      var claim_id;
+      var todo = false;
+
+      if (droppedOn.hasClass("item_trash")) {
+        console.log("You're trying to throw that away!");
+      }
+      else {
+        
+        if (dropped.data("claim_id") != droppedOn.data("claim_id")) {
+          // If it came from a claim, remove the claim first
+          if(typeof dropped.data("claim_id") != "undefined") {
+            console.log("first removing the claim");
+            todo = "remove";
+            url = dropped.data("url");
+            change_item(url, dropped.data("item_id"), todo);
+          }
+          console.log("now adding to a claim");
+          todo = "add";
+          url = droppedOn.data("url");
+          change_item(url, dropped.data("item_id"), todo);
+        }
+        
+      };
+
+      $(dropped).detach().css({top: 0,left: 0}).appendTo(droppedOn);
+      $( ".over" ).removeClass( "over" );
+    },
+    over: function(event, elem) {
+              $(this).addClass("over");
+              console.log("over");
+           },
+    out: function(event, elem) {
+              $(this).removeClass("over");
+           }
+  });
+
+});

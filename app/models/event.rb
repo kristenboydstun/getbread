@@ -1,10 +1,13 @@
 class Event < ActiveRecord::Base
   before_save :generate_slug
 
-  validates_presence_of :host_name
+  #validates_presence_of :host_name
   #validates_presence_of :host_email
 
   validates_presence_of :name
+
+  geocoded_by :location
+  after_validation :geocode
 
   has_many :claims, :dependent => :destroy
   has_many :items, through: :claims
