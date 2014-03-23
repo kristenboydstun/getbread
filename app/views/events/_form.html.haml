@@ -5,27 +5,27 @@
     %ul#progressbar
       %li.active Setup
       %li Event Details
-      %li Pick a Date
+      %li Menu
     / fieldsets
     %fieldset
-      %h2.fs-title Create an event in 3 steps
+      %h2.fs-title Setup
       %h3.fs-subtitle
         = render "shared/errors", :obj => @event
-      = f.text_field :host_name, placeholder: "Your name"
-      /= f.text_field :host_email, placeholder: "Email"
+      = f.text_field :name, placeholder: "Event name"
+      = f.text_field :host_name, placeholder: "Host's name (optional)"
+      /= f.text_field :host_email, placeholder: "Email (optional)"
       %input.next.action-button{:name => "next", :type => "button", :value => "Next"}/
     %fieldset
       %h2.fs-title Event Details
-      %h3.fs-subtitle Almost done!
-      = f.text_field :name, placeholder: "Event name"
-      = f.text_field :location, placeholder: "Location (optional)"
-      = f.text_field :description, placeholder: "Details (optional)"
+      /%h3.fs-subtitle Almost done!
+      = f.text_field :location, placeholder: "Location or Address"
+      = f.text_field :start_date, placeholder: "Date", 'data-behaviour' => "datepicker"
+      /= f.text_field :description, placeholder: "Details (optional)"
       %input.previous.action-button{:name => "previous", :type => "button", :value => "Previous"}/
       %input.next.action-button{:name => "next", :type => "button", :value => "Next"}/
     %fieldset
-      %h2.fs-title Pick a Date
-      %h3.fs-subtitle Last step
-      = f.text_field :start_date, placeholder: "Date", 'data-behaviour' => "datepicker"
+      %h2.fs-title Menu
+      %h3.fs-subtitle Option to choose a template menu coming soon!
       %input.previous.action-button{:name => "previous", :type => "button", :value => "Previous"}/
       %input.action-button{:name => "submit_button", :type => "submit", :value => "Done!"}/
 

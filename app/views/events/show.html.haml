@@ -13,6 +13,12 @@
             = @event.items.count
             %span.glyphicon.glyphicon-cutlery
           %br
+    .col-md-6
+      - if !@event.location.empty?
+        %div
+          #map{"data-markers" => "#{@hash.to_json}"}
+  %br
+  %br
   .row
     .col-md-6
       %ul.list-unstyled.unclaim_square.droppable{"data-claim_id" => @event.untaken_claim.id, "data-url" => "/events/#{@event.slug}/claims/#{@event.untaken_claim.id}"}

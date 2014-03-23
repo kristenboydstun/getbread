@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(version: 20140205223658) do
     t.string   "host_name"
     t.string   "host_email"
     t.string   "location"
+    t.float    "latitude"
+    t.float    "longitude"
     t.text     "description"
     t.date     "start_date"
     t.string   "slug"
