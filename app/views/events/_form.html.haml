@@ -5,15 +5,13 @@
     %ul#progressbar
       %li.active Setup
       %li Event Details
-      %li Menu
+      %li Host
     / fieldsets
     %fieldset
       %h2.fs-title Setup
       %h3.fs-subtitle
         = render "shared/errors", :obj => @event
       = f.text_field :name, placeholder: "Event name"
-      = f.text_field :host_name, placeholder: "Host's name (optional)"
-      /= f.text_field :host_email, placeholder: "Email (optional)"
       %input.next.action-button{:name => "next", :type => "button", :value => "Next"}/
     %fieldset
       %h2.fs-title Event Details
@@ -24,8 +22,10 @@
       %input.previous.action-button{:name => "previous", :type => "button", :value => "Previous"}/
       %input.next.action-button{:name => "next", :type => "button", :value => "Next"}/
     %fieldset
-      %h2.fs-title Menu
-      %h3.fs-subtitle Option to choose a template menu coming soon!
+      %h2.fs-title Host
+      %h3.fs-subtitle
+      = f.text_field :host_name, placeholder: "Host's name (optional)"
+      = f.text_field :host_email, placeholder: "Email (optional)"
       %input.previous.action-button{:name => "previous", :type => "button", :value => "Previous"}/
       %input.action-button{:name => "submit_button", :type => "submit", :value => "Done!"}/
 
