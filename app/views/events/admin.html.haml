@@ -1,51 +1,52 @@
-%section.show_event
-  .text-center
-    %h2 Menu-builder
-  %br
-  %br
-  .row
-    .col-md-5
-      %ul.nav.nav-tabs
-        %li.active
-          %a{"data-toggle" => "tab", :href => "#BBQ"} BBQ
-        %li
-          %a{"data-toggle" => "tab", :href => "#Picnic"} Picnic
-        %li
-          %a{"data-toggle" => "tab", :href => "#Drinks"} Drinks
-        %li
-          %a{"data-toggle" => "tab", :href => "#Extras"} Extra
-      .tab-content
-        - @menus.each do |menu|
-          %div{:class => "tab-pane #{"active" if @menus.first == menu}", :id => "#{menu.title}"}
-            %h5 Drag items to your event
-            %ul.list-unstyled.unclaim_square.droppable
-              - menu.items.each do |item|
-                %li
-                  %span.label.label-primary.draggable{"data-item_id" => item.id}
-                    = item.name
-      %br
-      %br
-      %h4 Drag items to your event or
-      %h4
-        = form_for @item, html: { class: "form-inline", :role => "form" } do |f|
-          .form-group
-            = f.text_field :name, placeholder: "add something else", class: 'form-control'
-            = hidden_field_tag 'event_id', @event.id
-          %button.btn.btn-primary{:type => "submit"} +
-    .col-md-5.col-md-offset-1
-      %h3= @event.name
-      %ul.list-unstyled.unclaim_square.droppable{"data-claim_id" => @event.untaken_claim.id, "data-url" => "/events/#{@event.slug}/claims/#{@event.untaken_claim.id}"}
-        - @event.items.each do |item|
-          %li
-            %span.label.label-primary.draggable{"data-claim_id" => @event.untaken_claim.id, "data-item_id" => item.id, "data-url" => "/events/#{@event.slug}/claims/#{@event.untaken_claim.id}"}
-              = item.name
-      %br
-      %br
-      %h4
-        = link_to "Invite your friends", confirmation_event_path(@event)
-  
-
-  .col-md-4.col-md-offset-1
+.photo-background-grayscale
+  %section.show_event
+    .text-center
+      %h2 Menu-builder
     %br
-    .item_trash.droppable.hidden
-      .glyphicon.glyphicon-trash
+    %br
+    .row
+      .col-md-5
+        %ul.nav.nav-tabs
+          %li.active
+            %a{"data-toggle" => "tab", :href => "#BBQ"} BBQ
+          %li
+            %a{"data-toggle" => "tab", :href => "#Picnic"} Picnic
+          %li
+            %a{"data-toggle" => "tab", :href => "#Drinks"} Drinks
+          %li
+            %a{"data-toggle" => "tab", :href => "#Extras"} Extra
+        .tab-content
+          - @menus.each do |menu|
+            %div{:class => "tab-pane #{"active" if @menus.first == menu}", :id => "#{menu.title}"}
+              %h5 Drag items to your event
+              %ul.list-unstyled.unclaim_square.droppable
+                - menu.items.each do |item|
+                  %li
+                    %span.label.label-primary.draggable{"data-item_id" => item.id}
+                      = item.name
+        %br
+        %br
+        %h4 Drag items to your event or
+        %h4
+          = form_for @item, html: { class: "form-inline", :role => "form" } do |f|
+            .form-group
+              = f.text_field :name, placeholder: "add something else", class: 'form-control'
+              = hidden_field_tag 'event_id', @event.id
+            %button.btn.btn-primary{:type => "submit"} +
+      .col-md-5.col-md-offset-1
+        %h3= @event.name
+        %ul.list-unstyled.unclaim_square.droppable{"data-claim_id" => @event.untaken_claim.id, "data-url" => "/events/#{@event.slug}/claims/#{@event.untaken_claim.id}"}
+          - @event.items.each do |item|
+            %li
+              %span.label.label-primary.draggable{"data-claim_id" => @event.untaken_claim.id, "data-item_id" => item.id, "data-url" => "/events/#{@event.slug}/claims/#{@event.untaken_claim.id}"}
+                = item.name
+        %br
+        %br
+        %h4
+          = link_to "Invite your friends", confirmation_event_path(@event)
+    
+
+    .col-md-4.col-md-offset-1
+      %br
+      .item_trash.droppable.hidden
+        .glyphicon.glyphicon-trash

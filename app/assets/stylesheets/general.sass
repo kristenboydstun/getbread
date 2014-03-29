@@ -4,16 +4,45 @@ $font-family-sans-serif: 'Source Sans Pro', Helvetica, Arial, sans-serif
 
 @import 'bootstrap'
 
-html, body 
-  margin: 0
-  width: 100%
+html
   height: 100%
 
-
 body
-  padding-top: 70px
-  background: image-url('pattern7.png')
-  background: linear-gradient(rgba(0, 0, 0, 1.0), rgba(213, 41, 34, 0.0)), image-url('pattern7.png')
+  min-height: 100%
 
-  a
-    color: #AE1D00
+.picnic-background
+  margin: 0px
+  height: 100%
+  width: 100%
+  background-image: linear-gradient(90deg, rgba(200,0,0,.5) 50%, transparent 50%), linear-gradient(rgba(200,0,0,.5) 50%, transparent 50%)
+  background-size: 200px 200px
+
+.photo-background
+  $header-img: image-url('grill_image.jpg')
+  background: $header-img no-repeat center center fixed
+  -webkit-background-size: cover
+  -moz-background-size: cover
+  -o-background-size: cover
+  background-size: cover
+  background-color: grey
+
+.photo-background-grayscale
+  background-attachment: fixed
+  height: 100%
+  width: 100%
+  padding-top: 80px
+  $header-img: image-url('grill_image_grayscale.jpg')
+  background: $header-img no-repeat center center fixed
+  -webkit-background-size: cover
+  -moz-background-size: cover
+  -o-background-size: cover
+  background-size: cover
+  background-color: grey
+
+.slate-background
+  background-size: cover
+  //background-color: rgb(149, 169, 198)
+  background-color: rgba(171, 205, 139, 0.4)
+
+a
+  color: #AE1D00

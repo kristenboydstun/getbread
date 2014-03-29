@@ -1,68 +1,58 @@
-%section.show_event
-  .row
-    .col-md-6
-      %article
-        %header
-          %h2
-            = @event.name
-          %h3
-            = "Hosted by #{@event.host_name}"
-          %h4
-            = @event.taken_claims.count
-            %span.glyphicon.glyphicon-user
-            = @event.items.count
-            %span.glyphicon.glyphicon-cutlery
-          %br
-    .col-md-6
-      - if !@event.location.empty?
-        %div
-          #map{"data-markers" => "#{@hash.to_json}"}
-  %br
-  %br
-  .row
-    .col-md-6
-      %ul.list-unstyled.unclaim_square.droppable{"data-claim_id" => @event.untaken_claim.id, "data-url" => "/events/#{@event.slug}/claims/#{@event.untaken_claim.id}"}
-        - @event.untaken_items.each do |item|
-          %li
-            %span.label.label-primary.draggable{"data-claim_id" => @event.untaken_claim.id, "data-item_id" => item.id, "data-url" => "/events/#{@event.slug}/claims/#{@event.untaken_claim.id}"}
-              = item.name
-      %br
-      .row
-        .col-md-7
-          = form_for @item, html: { class: "form-inline", :role => "form" } do |f|
-            .form-group
-              = f.text_field :name, placeholder: "cheese", class: 'form-control'
-              = hidden_field_tag 'event_id', @event.id
-            %button.btn.btn-primary{:type => "submit"} +
-      %br
-      .row
-        .col-md-7.col-md-offset-3.item_trash.droppable.hidden
-          .glyphicon.glyphicon-trash
-    .col-md-6
-      %ul.list-unstyled
-        - @event.taken_claims.each do |taken_claim|
-          %li.row
-            %h5.claim_name.col-md-2.col-md-offset-1
-              = taken_claim.username
-            .claim_square.col-md-3.droppable{"data-claim_id" => taken_claim.id, "data-url" => "/events/#{@event.slug}/claims/#{taken_claim.id}"}
-              - taken_claim.items.each do |item|
-                %span.label.label-primary.draggable{"data-claim_id" => taken_claim.id, "data-item_id" => item.id, "data-url" => "/events/#{@event.slug}/claims/#{taken_claim.id}"}
-                  = item.name
-      %br
-      .row
-        .col-md-10.col-md-offset-1
-          = form_for [@event, @claim], html: { class: "form-inline", :role => "form" } do |f|
-            .form-group
-              = f.text_field :username, placeholder: "Your name", class: 'form-control'
-            %button.btn.btn-primary{:type => "submit"} +
-
-:javascript
-  $(function(){
-      $.fn.editable.defaults.mode = 'inline';
-      $('#claimed a').editable({
-          ajaxOptions: {
-            dataType: 'json',
-            type: 'PUT'
-        }
-      });
-  });
+.photo-background-grayscale.container
+  %section.show_event.container
+    .row
+      .col-md-6
+        %article
+          %header
+            %h2
+              = @event.name
+            %h3
+              = "Hosted by #{@event.host_name}"
+            %h4
+              = @event.taken_claims.count
+              %span.glyphicon.glyphicon-user
+              = @event.items.count
+              %span.glyphicon.glyphicon-cutlery
+            %br
+      .col-md-6
+        - if !@event.location.empty?
+          %div
+            #map{"data-markers" => "#{@hash.to_json}"}
+    %br
+    %br
+    .row
+      .col-md-6
+        %ul.list-unstyled.unclaim_square.droppable{"data-claim_id" => @event.untaken_claim.id, "data-url" => "/events/#{@event.slug}/claims/#{@event.untaken_claim.id}"}
+          - @event.untaken_items.each do |item|
+            %li
+              %span.label.label-primary.draggable{"data-claim_id" => @event.untaken_claim.id, "data-item_id" => item.id, "data-url" => "/events/#{@event.slug}/claims/#{@event.untaken_claim.id}"}
+                = item.name
+        %br
+        .row
+          .col-md-7
+            = form_for @item, html: { class: "form-inline", :role => "form" } do |f|
+              .form-group
+                = f.text_field :name, placeholder: "cheese", class: 'form-control'
+                = hidden_field_tag 'event_id', @event.id
+              %button.btn.btn-primary{:type => "submit"} +
+        %br
+        .row
+          .col-md-7.col-md-offset-3.item_trash.droppable.hidden
+            .glyphicon.glyphicon-trash
+      .col-md-6
+        %ul.list-unstyled
+          - @event.taken_claims.each do |taken_claim|
+            %li.row
+              %h5.claim_name.col-md-2.col-md-offset-1
+                = taken_claim.username
+              .claim_square.col-md-3.droppable{"data-claim_id" => taken_claim.id, "data-url" => "/events/#{@event.slug}/claims/#{taken_claim.id}"}
+                - taken_claim.items.each do |item|
+                  %span.label.label-primary.draggable{"data-claim_id" => taken_claim.id, "data-item_id" => item.id, "data-url" => "/events/#{@event.slug}/claims/#{taken_claim.id}"}
+                    = item.name
+        %br
+        .row
+          .col-md-10.col-md-offset-1
+            = form_for [@event, @claim], html: { class: "form-inline", :role => "form" } do |f|
+              .form-group
+                = f.text_field :username, placeholder: "Your name", class: 'form-control'
+              %button.btn.btn-primary{:type => "submit"} +
