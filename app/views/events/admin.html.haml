@@ -25,8 +25,8 @@
               %h5 Drag items to your event
               %ul.list-unstyled.unclaim_square.droppable
                 - menu.items.each do |item|
-                  %li
-                    %span.label.label-primary.draggable{"data-item_id" => item.id}
+                  %li.draggable{"data-item_id" => item.id}
+                    %span.label.label-primary
                       = item.name
         %br
         %br
@@ -41,8 +41,8 @@
         %h3= @event.name
         %ul.list-unstyled.unclaim_square.droppable{"data-claim_id" => @event.untaken_claim.id, "data-url" => "/events/#{@event.slug}/claims/#{@event.untaken_claim.id}"}
           - @event.items.each do |item|
-            %li
-              %span.label.label-primary.draggable{"data-claim_id" => @event.untaken_claim.id, "data-item_id" => item.id, "data-url" => "/events/#{@event.slug}/claims/#{@event.untaken_claim.id}"}
+            %li.draggable{"data-claim_id" => @event.untaken_claim.id, "data-item_id" => item.id, "data-url" => "/events/#{@event.slug}/claims/#{@event.untaken_claim.id}"}
+              %span.label.label-primary
                 = item.name
         %br
         %br

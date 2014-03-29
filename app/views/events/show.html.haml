@@ -24,8 +24,8 @@
       .col-md-6
         %ul.list-unstyled.unclaim_square.droppable{"data-claim_id" => @event.untaken_claim.id, "data-url" => "/events/#{@event.slug}/claims/#{@event.untaken_claim.id}"}
           - @event.untaken_items.each do |item|
-            %li
-              %span.label.label-primary.draggable{"data-claim_id" => @event.untaken_claim.id, "data-item_id" => item.id, "data-url" => "/events/#{@event.slug}/claims/#{@event.untaken_claim.id}"}
+            %li.draggable{"data-claim_id" => @event.untaken_claim.id, "data-item_id" => item.id, "data-url" => "/events/#{@event.slug}/claims/#{@event.untaken_claim.id}"}
+              %span.label.label-primary
                 = item.name
         %br
         .row
@@ -45,10 +45,11 @@
             %li.row
               %h5.claim_name.col-md-2.col-md-offset-1
                 = taken_claim.username
-              .claim_square.col-md-3.droppable{"data-claim_id" => taken_claim.id, "data-url" => "/events/#{@event.slug}/claims/#{taken_claim.id}"}
+              %ul.list-unstyled.claim_square.col-md-3.droppable{"data-claim_id" => taken_claim.id, "data-url" => "/events/#{@event.slug}/claims/#{taken_claim.id}"}
                 - taken_claim.items.each do |item|
-                  %span.label.label-primary.draggable{"data-claim_id" => taken_claim.id, "data-item_id" => item.id, "data-url" => "/events/#{@event.slug}/claims/#{taken_claim.id}"}
-                    = item.name
+                  %li.draggable{"data-claim_id" => taken_claim.id, "data-item_id" => item.id, "data-url" => "/events/#{@event.slug}/claims/#{taken_claim.id}"}
+                    %span.label.label-primary
+                      = item.name
         %br
         .row
           .col-md-10.col-md-offset-1
